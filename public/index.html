@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Scraper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      body { background-color: #F2F6D0 }
+      #wrapper {
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5%;
+      }
+      #news {
+        display: inline-block;
+        overflow: auto;
+        width: 60%;
+        height: 700px;
+      }
+      textarea, input {
+        display: block;
+        width: 100%;
+        background-color: #FCF5C7;
+      }
+      input {
+        height: 36px;
+        font-size: 24px;
+      }
+      textarea {
+        height: 200px;
+        font-size: 18px;
+      }
+    </style>
+    <link rel="shortcut icon" href="#" />
+    
+  </head>
+  <body>
+  <div class="container">
+    <div id="wrapper">
+      <div class="row">
+        <div class="col">
+            <h1>Find Your Adventure</h1>
+            <h2><i>The Beautiful State Parks of the Pacific Northwest</i></h2>
+            <br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="mt-4">OREGON</h2>
+            <div id="parks_or"></div>
+            <div id="notes_or"></div>
+        </div>
+        <div class="col-md-6">
+            <h2 class="mt-4">WASHINGTON</h2>
+            <div id="parks_wa"></div>
+            <div id="parks_wa"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
