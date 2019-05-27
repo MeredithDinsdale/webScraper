@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Scraper</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
     <style>
       body { background-color: #F2F6D0 }
       #wrapper {
@@ -12,12 +15,33 @@
         margin-right: auto;
         padding-top: 5%;
       }
-      #news {
-        display: inline-block;
-        overflow: auto;
-        width: 60%;
-        height: 700px;
+   
+      
+      a {
+        color: purple;
       }
+
+      a:hover {
+      
+        color: rgb(136, 67, 136);
+      }
+
+      a:visited {
+        color: rgb(97, 67, 97);
+      }
+
+      .jumbotron {
+        background-image: url("./pnw_banner.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      
+      .banner_text {
+        color: rgb(253, 247, 247);
+        text-shadow: rgb(75, 75, 73);
+      }
+      
       textarea, input {
         display: block;
         width: 100%;
@@ -36,25 +60,36 @@
     
   </head>
   <body>
+      <nav>
+          <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">    <i class="fas fa-tree"></i>   </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="#parks">State Parks</a></li>
+            </ul>
+          </div>
+        </nav>
+              
   <div class="container">
     <div id="wrapper">
-      <div class="row">
-        <div class="col">
-            <h1>Find Your Adventure</h1>
-            <h2><i>In The Beautiful Pacific Northwest</i></h2>
+      <div class="row jumbotron">
+        <div class="col banner_text">
+            <h1>Discover</h1>
+            <h2><i>The Beautiful Pacific Northwest</i></h2>
             <br>
         </div>
       </div>
-      
+      <h3>Current Stories About the PNW</h3>
         <div id="news"></div>
+        <div id="notes"></div>
     
-      <div class="row">
-        <div class="col-md-6">
+      <div class="row" id="parks">
+        <h3>Explore the State Parks of Oregon & Washington</h3>
+        <div class="col">
           <h2 class="mt-1">OREGON</h2>
             <div id="parks_or"></div>
             <div id="notes_or"></div>
         </div>
-        <div class="col-md-6">
+        <div class="col">
             <h2 class="mt-1">WASHINGTON</h2>
             <div id="parks_wa"></div>
             <div id="parks_wa"></div>
@@ -62,8 +97,11 @@
       </div>
       
     </div>
+    
   </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
     <script src="app.js"></script>
   </body>
 </html>

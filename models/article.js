@@ -14,27 +14,16 @@ var articleSchema = new Schema({
   link: {
     type: String
   },
-  img: {
-    type: String,
+  excerpt: {
+    type: String
   },
   date: {
-    type: String,
-
+    type: String
+  },
+  note: {
+    type: Schema.Types.ObjectId,
+    ref: "Note"
   }
-  // comments: [{
-  //       commentBody: {
-  //         type: String,
-  //         required: true
-  //       },
-  //       commentDate: {
-  //         type: Date,
-  //         default: Date.now
-  //       },
-  //       commentUser: {
-  //         type: String,
-  //         required: true
-  //       }
-  //   }]
 });
 
 //Use mongoose's model method to create model from the above schema
