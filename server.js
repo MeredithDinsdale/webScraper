@@ -111,7 +111,56 @@ app.get("/scrape_wa", function(req, res) {
   });
 });
 
-  // Route for getting all Articles from the db
+// PNW Outdoor News~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// A GET route for scraping the echoJS website
+app.get("/scrape_news", function(req, res) {
+  // First, we grab the body of the html with axios
+  axios.get("http://nwtravelmag.com").then(function(response) {
+    // Then, we load that into cheerio and save it to $ for a shorthand selector
+    var $ = cheerio.load(response.data);
+    // console.log(response.data);
+
+     // Now, we grab every h2 within an article tag, and do the following:
+     $("div.td_module_2").each(function(i, element) {
+       // Save an empty result object
+       var result = {};
+       
+       // Add the text and href of every link, and save them as properties of the result object
+        result.Article = $(this)
+          .children("h3.entry-title")
+          .text()
+        console.log(result.Article);
+        result.link = $(this)
+          .children("h3.entry-title")
+          .children("a")
+          .attr("href")
+        console.log(result.link);
+        result.img = $(this)
+          .children("td-module-image")
+          .children("td-module-thumb")
+          .children("a")
+          .attr("href")
+        console.log(result.img);
+     
+  
+     //Create a new Article using the `result` object built from scraping
+        db.Article.create(result)
+          .then(function(dbArticle) {
+            // View the added result in the console
+            console.log(dbArticle);
+          })
+          .catch(function(err) {
+            // If an error occurred, log it
+            console.log(err);
+          });
+     });
+
+    // Send a message to the client
+    res.send("Scrape Complete");
+  });
+});
+
+  // Route for grabbing Oregon Parks
   app.get("/parks_or", function(req, res) {
     // Grab every document in the Articles collection
     db.Parks_or.find({})
@@ -125,13 +174,27 @@ app.get("/scrape_wa", function(req, res) {
       });
   });
   
-  // Route for grabbing a specific Article by state
+  // Route for grabbing Washington Parks
   app.get("/parks_wa", function(req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
     db.Parks_wa.find({})
       .then(function(dbParks_wa) {
         // If we were able to successfully find an Article with the given id, send it back to the client
         res.json(dbParks_wa);
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+  });
+
+   // Route for grabbing News Articles
+   app.get("/articles", function(req, res) {
+    // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+    db.Article.find({})
+      .then(function(dbArticle) {
+        // If we were able to successfully find an Article with the given id, send it back to the client
+        res.json(dbArticle);
       })
       .catch(function(err) {
         // If an error occurred, send it to the client

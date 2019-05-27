@@ -14,6 +14,14 @@ $.getJSON("/parks_or", function(data) {
       $("#parks_wa").append("<p data-id='" + data[i]._id + "'>" + data[i].park + "<br />" + data[i].state + "</p>");
     }
   });
+
+  $.getJSON("/articles", function(data) {
+    // For each one
+    for (var i = 0; i < data.length; i++) {
+      // Display the apropos information on the page
+      $("#news").append("<a data-id=" + data[i]._id + " href="+ data[i].link +">" + data[i].Article + "<br /><br></a>");
+    }
+  });
   
   
   // Whenever someone clicks a p tag
