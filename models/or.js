@@ -14,27 +14,6 @@ var orSchema = new Schema({
   state: {
     type: String
   }
-  // img: {
-  //   type: String,
-  // },
-  // date: {
-  //   type: Date,
-  //   default: Date.now
-  // },
-  // comments: [{
-  //       commentBody: {
-  //         type: String,
-  //         required: true
-  //       },
-  //       commentDate: {
-  //         type: Date,
-  //         default: Date.now
-  //       },
-  //       commentUser: {
-  //         type: String,
-  //         required: true
-  //       }
-  //   }]
 });
 
 //Use mongoose's model method to create model from the above schema

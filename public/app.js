@@ -1,3 +1,6 @@
+$(document).ready(function() {
+$('#news').text('');
+
 // Grab the articles as a json
 $.getJSON("/parks_or", function(data) {
     // For each one
@@ -19,20 +22,26 @@ $.getJSON("/parks_or", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      let newsHeadline = $('<div>').attr('data-id', data[i]._id).html(`<a href="${data[i].link}"><h5> ${data[i].Article}</h5></a><p>${data[i].excerpt}<br />${data[i].date}</p><a href="#notes" class="button waves-effect waves-light btn-small" data-id="${data[i]._id}">Comment</a><br>`);
-      $("#news").append(newsHeadline);
+      let row = $('<div>').attr('class', 'row my-3');
+      let newsHeadline = $('<div>').attr('data-id', data[i]._id)
+                                   .html(`<a href="${data[i].link}"><h5> ${data[i].Article}</h5></a><p>${data[i].excerpt}<br />${data[i].date}</p><a href="#notes" class="button waves-effect waves-light btn-small" data-id="${data[i]._id}">Comment</a><br>`);
+      let newsComments = $('<div>').attr('data-id', data[i]._id)
+                                   .html(`<h5 class="gray" id="coments_showhide">Comments<b /></h5><p> ${data[i].note} </p>`);
+      let divider = $('<div>').attr('class', 'divider');
+      $(row).append(newsHeadline, newsComments, divider);
+      $("#news").append(row);
     }
   });
   
   
   // Whenever someone clicks a button
   $(document).on("click", ".button", function() {
-    console.log('button clicked');
+    // console.log('button clicked');
     // Empty the notes from the note section
     $("#notes").empty();
     // Save the id from the button
     var thisId = $(this).attr("data-id");
-    console.log(thisId);
+    console.log("article ID is... " + thisId);
   
     // Now make an ajax call for the Article
     $.ajax({
@@ -50,7 +59,7 @@ $.getJSON("/parks_or", function(data) {
         // A textarea to add a new note body
         $("#notes").append("<textarea id='bodyinput' name='body' placeholder='Leave your comment here'></textarea>");
         // A button to submit a new note, with the id of the article saved to it
-        $("#notes").append("<a class='pt-3 waves-effect waves-light btn-small' data-id='" + data._id + "' id='savenote'>Save Comment</a>");
+        $("#notes").append("<a href='#top' class='pt-3 waves-effect waves-light btn-small' data-id='" + data._id + "' id='savenote'>Save Comment</a>");
   
         // If there's a note in the article
         if (data.note) {
@@ -74,11 +83,9 @@ $.getJSON("/parks_or", function(data) {
       method: "POST",
       url: "/articles/" + thisId,
       data: {
-        // Value taken from title input
         title: $("#titleinput").val(),
-        // Value taken from note textarea
         body: $("#bodyinput").val(),
-        commentUser: $("#userinput").val()
+        user: $("#userinput").val()
       }
     })
       // With that done
@@ -93,4 +100,7 @@ $.getJSON("/parks_or", function(data) {
     $("#titleinput").val("");
     $("#bodyinput").val("");
   });
+
+});
+
   
