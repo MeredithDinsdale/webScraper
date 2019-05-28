@@ -6,7 +6,7 @@ const cheerio = require("cheerio");
 
 const db = require("./models");
 
-const PORT = 3030;
+const PORT = process.env.port || 3030;
 
 //Initialize express
 const app = express();
@@ -31,7 +31,7 @@ mongoose.connect(MONGODB_URI);
 // app.use('/api', apiRoutes);
 
 //Connect to Mongo DB
-mongoose.connect("mongodb://localhost/webScraper_db", { useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost/webScraper_db", { useNewUrlParser: true});
 
 //Start the server
 app.listen(PORT, () => {
