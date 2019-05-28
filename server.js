@@ -19,6 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
+mongoose.connect(MONGODB_URI);
+
 // const htmlRoutes = require('./routes/htmlRoutes');
 // const apiRoutes = require('./routes/apiRoutes');
 
@@ -223,7 +228,7 @@ app.get("/scrape_news", function(req, res) {
         });
     });
 
-    
+
   
   // Route for saving/updating an Article's associated Note
   app.post("/articles/:id", function(req, res) {
