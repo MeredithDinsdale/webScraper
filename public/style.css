@@ -26,6 +26,10 @@ a:hover {
   font-family: 'Raleway', sans-serif;
 }
 
+.fa-tree, .fa-mountain {
+    color: rgb(95, 92, 92); 
+}
+
 .jumbotron {
   background-image: url("./pnw_banner.jpg");
   background-repeat: no-repeat;
@@ -73,3 +77,5 @@ textarea {
   transform: rotate(720deg); 
   transition: .3s;
 }
+
+

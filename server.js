@@ -155,7 +155,6 @@ axios.get("http://nwtravelmag.com").then(function(response) {
   res.send("Scrape Complete");
 });
 });
-
 // Route for grabbing Oregon Parks
 app.get("/parks_or", function(req, res) {
   // Grab every document in the Parks_or collection
