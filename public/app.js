@@ -1,14 +1,21 @@
 $(document).ready(function() {
+
+//When page reloads, scroll to top and display welcome modal=========================================================
   $(this).scrollTop(0);
   setTimeout(function(){ 
     $('.modal').modal({
       preventScrolling: false
     });
     $('#modal1').modal('open');
- }, 1000);     
+ }, 1000); 
+ 
+//scroll to the top of the page when the logo is clicked==========================================================
+ $(document).on("click", "#logo", function() {
+  $('html,body').scrollTop(0);
+})
 
 
-// Grabbing the scraped data as json (parks and articles)
+// Grabbing the scraped data as json (parks and articles)==============================================================
 let getData = function() {
 $.getJSON("/parks_or", function(data) {
     for (var i = 0; i < data.length; i++) {
