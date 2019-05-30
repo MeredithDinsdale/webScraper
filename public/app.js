@@ -46,7 +46,7 @@ $.getJSON("/articles", function(data) {
       let row = $('<div>').attr('class', 'row my-3');
       let newsHeadline = $('<div>').attr('data-id', data[i]._id)
                                    .attr('id', data[i]._id)
-                                   .html(`<a href="${data[i].link}"><h5> ${data[i].Article}</h5></a><p>${data[i].excerpt}<br />${data[i].date}</p><a href="#comments_top" class="button waves-effect waves-light btn-small" data-id="${data[i]._id}">Comment</a><br>`);
+                                   .html(`<a href="${data[i].link}" target="_blank"><h5> ${data[i].Article}</h5></a><p>${data[i].excerpt}<br />${data[i].date}</p><a href="#comments_top" class="button waves-effect waves-light btn-small" data-id="${data[i]._id}">Comment</a><br>`);
       let newsComments = $('<div>').attr('data-id', data[i]._id)
                                    .html(`<h5 class="gray" id="coments_showhide">Comments<b /></h5><p> ${data[i].note} </p>`);
       let divider = $('<div>').attr('class', 'divider');
