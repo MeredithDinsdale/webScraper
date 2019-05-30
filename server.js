@@ -159,6 +159,7 @@ axios.get("http://nwtravelmag.com").then(function(response) {
 app.get("/parks_or", function(req, res) {
   // Grab every document in the Parks_or collection
   db.Parks_or.find({})
+    .sort({ park: 1 })
     .then(function(dbParks_or) {
       // If we were able to successfully find parks_or, send them back to the client
       res.json(dbParks_or);
@@ -172,6 +173,7 @@ app.get("/parks_or", function(req, res) {
 // Route for grabbing Washington Parks
 app.get("/parks_wa", function(req, res) {
   db.Parks_wa.find({})
+    .sort({ park: 1 })
     .then(function(dbParks_wa) {
       res.json(dbParks_wa);
     })
