@@ -184,6 +184,7 @@ app.get("/parks_wa", function(req, res) {
  app.get("/articles", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.find({})
+    .sort({ date: -1 })
     .populate("Note")
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
