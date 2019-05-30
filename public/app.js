@@ -24,7 +24,7 @@ $.getJSON("/parks_or", function(data) {
         $("#parks_or").append("<p data-id='" + data[i]._id + "' id='" + data[i]._id + "'>" + data[i].park + "<br /></p>");
     }
     else {
-        console.log('That data already exists on the page');
+        console.log('That OR Parks data already exists on the page');
     } 
     }
   });
@@ -35,7 +35,7 @@ $.getJSON("/parks_wa", function(data) {
       $("#parks_wa").append("<p data-id='" + data[i]._id + "' id='" + data[i]._id + "'>" + data[i].park + "<br /></p>");
   }
   else {
-      console.log('That data already exists on the page');
+      console.log('That WA Parks data already exists on the page');
   } 
   }
 });
@@ -54,7 +54,7 @@ $.getJSON("/articles", function(data) {
       $("#news").append(row);
   }
   else {
-      console.log('That data already exists on the page');
+      console.log('That news data already exists on the page');
   } 
   }
 });
@@ -68,7 +68,7 @@ $(document).on('click', '#scrape_new', function () {
 
   event.preventDefault();
 
-  $('#loadIcon').append('<i class="fas fa-spinner fa-spin ml-1" style="font-size:24px; color:white;"></i>');
+  $('#loadIcon').append('<i class="fas fa-spinner fa-spin ml-1" style="font-size:24px;"></i>');
   M.toast({html: 'Scraping latest info...', displayLength: 4000, outDuration: 4000, classes: 'toast'});
 
   console.log('scraping data...');

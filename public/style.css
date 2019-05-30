@@ -15,6 +15,10 @@ nav {
   background-color: olive; 
 }
 
+.fa-spinner {
+  color: purple;
+}
+
 .toast {
   background-color: purple;
   border-radius: 5px;
