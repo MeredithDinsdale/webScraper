@@ -122,7 +122,7 @@ $(document).on("click", ".button", function() {
     .then(function(data) {
       console.log(data);
       // The title of the article
-      $("#notes").append("<h5>You are commenting on: <i>" + data.Article + "</i></h5>");
+      $("#notes").append("<h5 class='gray'>You are commenting on: <i>" + data.Article + "</i></h5>");
       $("#notes").append("<input id='userinput' name='user' placeholder='Username' >")
       // An input to enter a new title
       $("#notes").append("<input id='titleinput' name='title' placeholder='Comment Title'>");
