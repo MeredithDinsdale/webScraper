@@ -4,7 +4,8 @@ $(document).ready(function() {
   $(this).scrollTop(0);
   setTimeout(function(){ 
     $('.modal').modal({
-      preventScrolling: false
+      preventScrolling: false,
+      endingTop: '20%'
     });
     $('#modal1').modal('open');
  }, 1000); 
