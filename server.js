@@ -52,7 +52,7 @@ app.get("/scrape_or", function(req, res) {
        result.state = "Oregon";
        
      //Create a new park using the `result` object built from scraping
-      db.Parks_or.create(result)
+     db.Parks_or.updateOne(result, result, {upsert: true})
         .then(function(dbParks_or) {
           // View the added result in the console
           console.log(dbParks_or);
@@ -88,7 +88,7 @@ axios.get("https://parks.state.wa.us/281/Find-a-Park").then(function(response) {
       result.state = "Washington";
 
    //Create a new Article using the `result` object built from scraping
-     db.Parks_wa.create(result)
+   db.Parks_wa.updateOne(result, result, {upsert: true})
        .then(function(dbParks_wa) {
          // View the added result in the console
          console.log(dbParks_wa);
@@ -140,7 +140,7 @@ axios.get("http://nwtravelmag.com").then(function(response) {
       console.log(result.date);
 
    //Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
+   db.Article.updateOne(result, result, {upsert: true})
         .then(function(dbArticle) {
           // View the added result in the console
           console.log(dbArticle);

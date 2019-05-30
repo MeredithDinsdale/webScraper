@@ -1,34 +1,100 @@
 $(document).ready(function() {
+  $(this).scrollTop(0);
+  setTimeout(function(){ 
+    $('.modal').modal({
+      preventScrolling: false
+    });
+    $('#modal1').modal('open');
+ }, 1000);     
+
 
 // Grabbing the scraped data as json (parks and articles)
+let getData = function() {
 $.getJSON("/parks_or", function(data) {
     for (var i = 0; i < data.length; i++) {
-      $("#parks_or").append("<p data-id='" + data[i]._id + "'>" + data[i].park + "<br /></p>");
+      if ($('#'+data[i]._id).length === 0) {
+        $("#parks_or").append("<p data-id='" + data[i]._id + "' id='" + data[i]._id + "'>" + data[i].park + "<br /></p>");
+    }
+    else {
+        console.log('That data already exists on the page');
+    } 
     }
   });
 
 $.getJSON("/parks_wa", function(data) {
   for (var i = 0; i < data.length; i++) {
-    $("#parks_wa").append("<p data-id='" + data[i]._id + "'>" + data[i].park + "<br /></p>");
+    if ($('#'+data[i]._id).length === 0) {
+      $("#parks_wa").append("<p data-id='" + data[i]._id + "' id='" + data[i]._id + "'>" + data[i].park + "<br /></p>");
+  }
+  else {
+      console.log('That data already exists on the page');
+  } 
   }
 });
 
 $.getJSON("/articles", function(data) {
   for (var i = 0; i < data.length; i++) {
-    let row = $('<div>').attr('class', 'row my-3');
-    let newsHeadline = $('<div>').attr('data-id', data[i]._id)
-                                 .html(`<a href="${data[i].link}"><h5> ${data[i].Article}</h5></a><p>${data[i].excerpt}<br />${data[i].date}</p><a href="#comments_top" class="button waves-effect waves-light btn-small" data-id="${data[i]._id}">Comment</a><br>`);
-    let newsComments = $('<div>').attr('data-id', data[i]._id)
-                                 .html(`<h5 class="gray" id="coments_showhide">Comments<b /></h5><p> ${data[i].note} </p>`);
-    let divider = $('<div>').attr('class', 'divider');
-    $(row).append(newsHeadline, newsComments, divider);
-    $("#news").append(row);
+    if ($('#'+data[i]._id).length === 0) {
+      let row = $('<div>').attr('class', 'row my-3');
+      let newsHeadline = $('<div>').attr('data-id', data[i]._id)
+                                   .attr('id', data[i]._id)
+                                   .html(`<a href="${data[i].link}"><h5> ${data[i].Article}</h5></a><p>${data[i].excerpt}<br />${data[i].date}</p><a href="#comments_top" class="button waves-effect waves-light btn-small" data-id="${data[i]._id}">Comment</a><br>`);
+      let newsComments = $('<div>').attr('data-id', data[i]._id)
+                                   .html(`<h5 class="gray" id="coments_showhide">Comments<b /></h5><p> ${data[i].note} </p>`);
+      let divider = $('<div>').attr('class', 'divider');
+      $(row).append(newsHeadline, newsComments, divider);
+      $("#news").append(row);
+  }
+  else {
+      console.log('That data already exists on the page');
+  } 
   }
 });
+}
 
-//Updating the Scraped News `'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`' `'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'
+getData();
 
- $(document).on('click', '#scrape_new', scrapeNews());
+//Updating the Scraped Items `'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`' `'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'
+
+$(document).on('click', '#scrape_new', function () {
+
+  event.preventDefault();
+
+  $('#loadIcon').append('<i class="fas fa-spinner fa-spin ml-1" style="font-size:24px; color:white;"></i>');
+  M.toast({html: 'Scraping latest info...', displayLength: 4000, outDuration: 4000, classes: 'toast'});
+
+  console.log('scraping data...');
+
+  $.when(scrape_news(), scrape_or(), scrape_wa()).done(function () {  
+    $('#loadIcon').empty();
+    M.toast({html: 'All done!', displayLength: 2500, outDuration: 4000, classes: 'toast'});
+    getData();
+    $('html,body').animate({
+      scrollTop: $("#top").offset().top
+   });
+  });
+
+});
+
+let scrape_news = function () {
+  return $.get("/scrape_news", function (data) {
+    console.log(data);
+  });
+}
+
+let scrape_or = function () {
+  return $.get("/scrape_or", function (data) {
+    console.log(data);
+  });
+}
+
+let scrape_wa = function () {
+  return $.get("/scrape_wa", function (data) {
+    console.log(data);
+  });
+}
+
+});
    
 // Leaving comments on articles `'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'`'
 $(document).on("click", ".button", function() {
@@ -96,4 +162,3 @@ $(document).on("click", ".button", function() {
     $("#titleinput").val("");
     $("#bodyinput").val("");
   });
-}); 

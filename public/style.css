@@ -1,5 +1,9 @@
+html {
+  scroll-behavior: smooth;
+}
 
 body { background-color: #F2F6D0 }
+
 #wrapper {
   width: 960px;
   margin-left: auto;
@@ -11,14 +15,23 @@ nav {
   background-color: olive; 
 }
 
+.toast {
+  background-color: purple;
+  border-radius: 5px;
+}
+
 a {
   color: purple;
   font-family: 'Raleway', sans-serif;
+  text-shadow: white;
+  transition: text-shadow 300ms;
 }
 
 a:hover {
 
-  color: rgb(204, 26, 204);
+  color: rgb(109, 26, 126);
+  text-shadow: 1px 1px 3px rgb(157, 142, 163);
+  transition: text-shadow 400ms;
 }
 
 .gray, p {
@@ -31,19 +44,18 @@ a:hover {
 }
 
 .jumbotron {
-  background-image: url("./pnw_banner.jpg");
+  background-image: url("./ferns.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  border-radius: 10px;
 }
 
 .banner_text {
   color: rgb(253, 247, 247);
   text-shadow: rgb(75, 75, 73);
   font-family: 'Dancing Script', cursive;
-
 }
-
 .gray_banner_text {
   font-family: 'Dancing Script', cursive;
   color: rgb(95, 92, 92);
@@ -69,13 +81,35 @@ textarea {
   padding-top: 5px; 
   opacity: 1 !important;
 
-  transition: .2s ease-in-out; 
+  transition: scale .3s ease-out; 
 }
 
 #logo:hover {
   /* transform: scale(1.3); */
-  transform: rotate(720deg); 
-  transition: .3s;
+  transform: rotate(720deg) scale(1.2); 
+  transition: .4s ease-out;
 }
+
+.modal {
+  background-color: rgb(237, 252, 252);
+  box-shadow: 2px 2px 7px gray;
+  border-radius: 10px;
+}
+
+.modal-text {
+  color: rgb(58, 57, 57);
+  font-family: 'Raleway', sans-serif;
+}
+
+.modal-heading {
+  color: rgb(58, 57, 57);
+  font-family: 'Dancing Script', cursive;
+}
+
+.modal-close {
+  color: purple)
+}
+
+
 
 
